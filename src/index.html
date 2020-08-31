@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battleships</title>
+
+  <link rel="stylesheet" href="./static/css/app.css" />
+  <link rel="stylesheet" href="./static/css/main.css" />
+  <link rel="stylesheet" href="./static/css/fonts.css" />
+  <link rel="stylesheet" href="./static/css/media.css" />
+
+  <script src="./static/js/app.js" type="module" defer></script>
+</head>
+
+<body>
+  <div class="app">
+    <div class="app-container">
+      <div class="page" id="title-screen">
+        <div class="page-container">
+          <div class="title-container">
+            <div class="title">Battleships</div>
+          </div>
+          <div class="options">
+            <a class="option" href="#game-screen">Single Player</a>
+            <a class="option disabled">Multiplayer</a>
+            <a class="option disabled">How to Play</a>
+            <a class="option disabled">Source Code</a>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="victory-screen">
+        <div class="page-container">
+          <div class="title-container">
+            <div class="title">Victory!</div>
+            <div class="subtitle">Nelson Himself Would Be Proud</div>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="defeat-screen">
+        <div class="page-container">
+          <div class="title-container">
+            <div class="title">Defeat!</div>
+            <div class="subtitle">Your Armada Now Trawls The Deep</div>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="game-screen">
+        <div class="page-container">
+          <div class="title-container">
+            <div class="title" id="game-title"></div>
+            <div class="subtitle" id="game-subtitle"></div>
+          </div>
+          <div class="game-container" id="game-container">
+            <div class="game-board-container">
+              <div class="game-board" id="hboard"></div>
+            </div>
+            <div class="game-board-container">
+              <div class="game-board" id="cboard"></div>
+            </div>
+            <div class="subtitle">Your Board</div>
+            <div class="subtitle">Their Board</div>
+            <div class="ship-selection" id="hships">
+              <div class="ship-container">
+                <div class="ship ac" id="ac">
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship bs" id="bs">
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship cr" id="cr">
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship fr" id="fr">
+                  <div class="ship-cell" data-type="fr"></div>
+                  <div class="ship-cell" data-type="fr"></div>
+                  <div class="ship-cell" data-type="fr"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship ds" id="ds">
+                  <div class="ship-cell" data-type="ds"></div>
+                  <div class="ship-cell" data-type="ds"></div>
+                </div>
+              </div>
+            </div>
+            <div class="ship-selection" id="cships">
+              <div class="ship-container">
+                <div class="ship ac">
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                  <div class="ship-cell" data-type="ac"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship bs">
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                  <div class="ship-cell" data-type="bs"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship cr">
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship cr">
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                  <div class="ship-cell" data-type="cr"></div>
+                </div>
+              </div>
+              <div class="ship-container">
+                <div class="ship ds">
+                  <div class="ship-cell" data-type="ds"></div>
+                  <div class="ship-cell" data-type="ds"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio src="./static/assets/audio/hit_1.mp3" id="hit_1"></audio>
+  <audio src="./static/assets/audio/hit_2.mp3" id="hit_2"></audio>
+  <audio src="./static/assets/audio/audio.mp3" id="audio"></audio>
+  <audio src="./static/assets/audio/miss_1.mp3" id="miss_1"></audio>
+  <audio src="./static/assets/audio/miss_2.mp3" id="miss_2"></audio>
+  <audio src="./static/assets/audio/sunk_1.mp3" id="sunk_1"></audio>
+  <audio src="./static/assets/audio/sunk_2.mp3" id="sunk_2"></audio>
+  <audio src="./static/assets/audio/victory.mp3" id="victory"></audio>
+  <audio src="./static/assets/audio/defeat.mp3" id="defeat"></audio>
+
+</body>
+
+</html>
